@@ -1,0 +1,68 @@
+@extends('layouts.app')
+
+@section('content')
+<section class="content-header">
+    <h1>
+        Quiz
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Quiz</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Quiz Details</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <tr>
+                            <th>Description</th>
+                            <td>{!!htmlspecialchars_decode($question['description'])!!}</td>
+                        </tr>
+                        <tr>
+                            <th>Quiz Type</th>
+                            <td>{{$question['quiz']['quiz_name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Answer</th>
+                            <td>{{$question['answer']}}</td>
+                        </tr>
+                        <tr>
+                            <th>Options</th>
+                            <td>
+                            @foreach($option as $key => $opt)
+                            Option {{$key}} : 
+                            
+                                @if($question['format'] == 'file')
+                                <img src="/{{$opt}}" style="width: 5%">
+                                @else
+                                {{$opt}}
+                                @endif
+                                ,
+                            @endforeach
+                        </td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                @if($question->isEnable())
+                                    Enabled
+                                @else
+                                    Disabled
+                                @endif
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@endsection
